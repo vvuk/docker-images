@@ -31,8 +31,6 @@ LABEL maintainer="vladimir@pobox.com" \
 # ------------------------------------------------------------------------------
 
 RUN echo "\n## Update and install packages" \
-&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-&& echo "deb http://download.mono-project.com/repo/ubuntu xenial main" | tee /etc/apt/sources.list.d/mono-official.list \
 && apt-get -qq -y update \
 && apt-get -qq install -y --no-install-recommends \
         wget \
@@ -44,11 +42,7 @@ RUN echo "\n## Update and install packages" \
         xz-utils \
         make \
         unzip \
-        mono-devel \
-&& wget -O /usr/local/bin/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe \
-&& printf '#!/bin/bash\nexec /usr/bin/cli /usr/local/bin/nuget.exe $*\n' > /usr/local/bin/nuget \
-&& chmod +x /usr/local/bin/nuget \
-&& cd
+&& echo ""
 
 #RUN echo "\n## Installing LLVM/Clang" \
 #&&  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key -q | apt-key add - \
@@ -173,6 +167,17 @@ RUN echo "\n## Internal testing" \
 &&  em++ test.cpp -o test.js -s WASM=1 \
 &&  cd / \
 &&  rm -fr /tmp/emscripten_test
+
+RUN echo "\n## Install mono & msbuild" \
+&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
+&& echo "deb http://download.mono-project.com/repo/ubuntu xenial main" | tee /etc/apt/sources.list.d/mono-official.list \
+&& apt-get -qq -y update \
+&& apt-get -qq install -y \
+        mono-devel \
+        msbuild \
+&& wget -O /usr/local/bin/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe \
+&& printf '#!/bin/bash\nexec /usr/bin/cli /usr/local/bin/nuget.exe $*\n' > /usr/local/bin/nuget \
+&& chmod +x /usr/local/bin/nuget
 
 RUN echo "\n## Cleaning up" \
 &&  apt-get -y clean \
