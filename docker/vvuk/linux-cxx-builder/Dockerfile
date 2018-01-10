@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 # ------------------------------------------------------------------------------
 
-ARG EMSCRIPTEN_SDK=sdk-tag-1.37.21-64bit
+ARG EMSCRIPTEN_SDK=sdk-tag-1.37.26-64bit
 ARG BUILD_DATE
 ARG VCS_REF
 ARG CMAKE=https://cmake.org/files/v3.9/cmake-3.9.2-Linux-x86_64.sh

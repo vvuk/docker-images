@@ -1,0 +1,13 @@
+ 1764  docker build -t vvuk/linux-cxx-builder:latest .
+ 1765  sudo docker-squash vvuk/linux-cxx-builder:latest
+ 1766  docker history vvuk/linux-cxx-builder:latest
+ 1770  docker tag 4f4978f7 vvuk/linux-cxx-builder:latest
+ 1771  docker publish vvuk/linux-cxx-builder:latest
+ 1774  docker push vvuk/linux-cxx-builder:latest
+ 1776  docker build -t vvuk/linux-cxx-builder:latest .
+ 1778  docker build -t vvuk/linux-cxx-builder:latest .
+ 1779  docker run -it vvuk/linux-cxx-builder:latest bash
+ 1780  sudo docker-squash vvuk/linux-cxx-builder:latest
+ 1782  docker tag 213f515c3052687c19d122589c88b832cc61eda5f76336816beac6528 vvuk/linux-cxx-builder:latest
+ 1783  docker push vvuk/linux-cxx-builder:latest
+
